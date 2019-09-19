@@ -19,3 +19,8 @@
 
 
 
+## Powershell-Exchange on gitHub
+
+This repo contains a variety of PowerShell scripts and code samples for Microsoft Exchange Server.
+
+- [Powershell-Exchange](https://github.com/cunninghamp/Powershell-Exchange)

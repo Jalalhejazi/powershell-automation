@@ -36,7 +36,7 @@ start powershell as admin user:
 
 - Get-Help about_Pipelines
 - Get-Service | ForEach Name
-- Get-EventLog –List | Where Log –eq 'System' | ForEach Clear
+- Get-EventLog –List | Where Log –eq 'System'
 
 
 ## Using Function for ReUseAbility (DRY)
