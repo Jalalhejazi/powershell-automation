@@ -4,3 +4,5 @@
 - Office360 integration 
 - Azure-cli administration
 - dotnet integrations
+- Windows administration
+- SQLServer admin
