@@ -6,6 +6,7 @@ Get-ServerInfo.ps1 - PowerShell script to collect information about Windows serv
 This PowerShell script runs a series of WMI and other queries to collect information
 about Windows servers.
 
+
 .OUTPUTS
 Each server's results are output to HTML.
 
@@ -17,9 +18,23 @@ See more detailed progress as the script is running.
 Get-Help .\Get-ServerInfo.ps1 -Examples 
 
 .EXAMPLE
-. .\Get-ServerInfo.ps1 -ComputerName $env:COMPUTERNAME
+. .\Get-ServerInfo.ps1 -ComputerName $env:COMPUTERNAME -Verbose 
 
-Collect information about a single server.
+VERBOSE: Initializing
+VERBOSE: =====> Processing JALAL-PC <=====
+VERBOSE: Collecting computer system information
+VERBOSE: Collecting operating system information
+VERBOSE: Collecting physical memory information
+VERBOSE: Collecting pagefile information
+VERBOSE: Collecting BIOS information
+VERBOSE: Collecting logical disk information
+VERBOSE: Collecting volume information
+VERBOSE: Collecting network interface information
+VERBOSE: Collecting software information
+VERBOSE: Collecting services information
+VERBOSE: Producing HTML report
+VERBOSE: =====> Finished <=====
+
 
 .EXAMPLE
 "SERVER1","SERVER2","SERVER3" | .\Get-ServerInfo.ps1
