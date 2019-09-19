@@ -15,7 +15,7 @@ See more detailed progress as the script is running.
 
 .EXAMPLE
 
-Get-Help .\Get-WindowsInfo.ps1 -Examples 
+Get-Help .\Get-WindowsInfo.ps1 -Parameter *     
 
 .EXAMPLE
 
@@ -65,26 +65,26 @@ Can Take a while....
 [CmdletBinding()]
 Param (
 
-    [parameter(ValueFromPipeline=$True)]
-    [string[]]$ComputerName
+    [parameter(ValueFromPipeline = $True)]
+    [string[]]$ComputerName,
+
+    [switch] $Collecting_Sofware_information
+
 
 )
 
-Begin
-{
+Begin {
     #Initialize
     Write-Verbose "Initializing"
 
 }
 
-Process
-{
-   #---------------------------------------------------------------------
+Process {
+    #---------------------------------------------------------------------
     # Process each ComputerName
     #---------------------------------------------------------------------
 
-    if (!($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent))
-    {
+    if (!($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent)) {
         Write-Host "Processing $ComputerName"
     }
 
@@ -101,27 +101,22 @@ Process
     # removed later.
     #---------------------------------------------------------------------
     
-    try
-    {
-        $bestping = (Test-Connection -ComputerName $ComputerName -Count 10 -ErrorAction STOP | Sort ResponseTime)[0].ResponseTime
+    try {
+        $bestping = (Test-Connection -ComputerName $ComputerName -Count 10 -ErrorAction STOP | Sort-Object ResponseTime)[0].ResponseTime
     }
-    catch
-    {
+    catch {
         Write-Warning $_.Exception.Message
         $bestping = "Unable to connect"
     }
 
-    if ($bestping -eq "Unable to connect")
-    {
-        if (!($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent))
-        {
+    if ($bestping -eq "Unable to connect") {
+        if (!($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent)) {
             Write-Host "Unable to connect to $ComputerName"
         }
 
         "Unable to connect to $ComputerName"
     }
-    else
-    {
+    else {
 
         #---------------------------------------------------------------------
         # Collect computer system information and convert to HTML fragment
@@ -132,24 +127,23 @@ Process
         $subhead = "<h3>Computer System Information</h3>"
         $htmlbody += $subhead
     
-        try
-        {
+        try {
             $csinfo = Get-WmiObject Win32_ComputerSystem -ComputerName $ComputerName -ErrorAction STOP |
-                Select-Object Name,Manufacturer,Model,
-                            @{Name='Physical Processors';Expression={$_.NumberOfProcessors}},
-                            @{Name='Logical Processors';Expression={$_.NumberOfLogicalProcessors}},
-                            @{Name='Total Physical Memory (Gb)';Expression={
-                                $tpm = $_.TotalPhysicalMemory/1GB;
-                                "{0:F0}" -f $tpm
-                            }},
-                            DnsHostName,Domain
+            Select-Object Name, Manufacturer, Model,
+            @{Name = 'Physical Processors'; Expression = { $_.NumberOfProcessors } },
+            @{Name = 'Logical Processors'; Expression = { $_.NumberOfLogicalProcessors } },
+            @{Name = 'Total Physical Memory (Gb)'; Expression = {
+                    $tpm = $_.TotalPhysicalMemory / 1GB;
+                    "{0:F0}" -f $tpm
+                }
+            },
+            DnsHostName, Domain
        
             $htmlbody += $csinfo | ConvertTo-Html -Fragment
             $htmlbody += $spacer
        
         }
-        catch
-        {
+        catch {
             Write-Warning $_.Exception.Message
             $htmlbody += "<p>An error was encountered. $($_.Exception.Message)</p>"
             $htmlbody += $spacer
@@ -166,23 +160,22 @@ Process
         $subhead = "<h3>Operating System Information</h3>"
         $htmlbody += $subhead
     
-        try
-        {
+        try {
             $osinfo = Get-WmiObject Win32_OperatingSystem -ComputerName $ComputerName -ErrorAction STOP | 
-                Select-Object @{Name='Operating System';Expression={$_.Caption}},
-                            @{Name='Architecture';Expression={$_.OSArchitecture}},
-                            Version,Organization,
-                            @{Name='Install Date';Expression={
-                                $installdate = [datetime]::ParseExact($_.InstallDate.SubString(0,8),"yyyyMMdd",$null);
-                                $installdate.ToShortDateString()
-                            }},
-                            WindowsDirectory
+            Select-Object @{Name = 'Operating System'; Expression = { $_.Caption } },
+            @{Name = 'Architecture'; Expression = { $_.OSArchitecture } },
+            Version, Organization,
+            @{Name = 'Install Date'; Expression = {
+                    $installdate = [datetime]::ParseExact($_.InstallDate.SubString(0, 8), "yyyyMMdd", $null);
+                    $installdate.ToShortDateString()
+                }
+            },
+            WindowsDirectory
 
             $htmlbody += $osinfo | ConvertTo-Html -Fragment
             $htmlbody += $spacer
         }
-        catch
-        {
+        catch {
             Write-Warning $_.Exception.Message
             $htmlbody += "<p>An error was encountered. $($_.Exception.Message)</p>"
             $htmlbody += $spacer
@@ -198,19 +191,17 @@ Process
         $subhead = "<h3>Physical Memory Information</h3>"
         $htmlbody += $subhead
 
-        try
-        {
+        try {
             $memorybanks = @()
             $physicalmemoryinfo = @(Get-WmiObject Win32_PhysicalMemory -ComputerName $ComputerName -ErrorAction STOP |
-                Select-Object DeviceLocator,Manufacturer,Speed,Capacity)
+                Select-Object DeviceLocator, Manufacturer, Speed, Capacity)
 
-            foreach ($bank in $physicalmemoryinfo)
-            {
+            foreach ($bank in $physicalmemoryinfo) {
                 $memObject = New-Object PSObject
                 $memObject | Add-Member NoteProperty -Name "Device Locator" -Value $bank.DeviceLocator
                 $memObject | Add-Member NoteProperty -Name "Manufacturer" -Value $bank.Manufacturer
                 $memObject | Add-Member NoteProperty -Name "Speed" -Value $bank.Speed
-                $memObject | Add-Member NoteProperty -Name "Capacity (GB)" -Value ("{0:F0}" -f $bank.Capacity/1GB)
+                $memObject | Add-Member NoteProperty -Name "Capacity (GB)" -Value ("{0:F0}" -f $bank.Capacity / 1GB)
 
                 $memorybanks += $memObject
             }
@@ -218,8 +209,7 @@ Process
             $htmlbody += $memorybanks | ConvertTo-Html -Fragment
             $htmlbody += $spacer
         }
-        catch
-        {
+        catch {
             Write-Warning $_.Exception.Message
             $htmlbody += "<p>An error was encountered. $($_.Exception.Message)</p>"
             $htmlbody += $spacer
@@ -235,17 +225,15 @@ Process
 
         Write-Verbose "Collecting pagefile information"
 
-        try
-        {
+        try {
             $pagefileinfo = Get-WmiObject Win32_PageFileUsage -ComputerName $ComputerName -ErrorAction STOP |
-                Select-Object @{Name='Pagefile Name';Expression={$_.Name}},
-                            @{Name='Allocated Size (Mb)';Expression={$_.AllocatedBaseSize}}
+            Select-Object @{Name = 'Pagefile Name'; Expression = { $_.Name } },
+            @{Name = 'Allocated Size (Mb)'; Expression = { $_.AllocatedBaseSize } }
 
             $htmlbody += $pagefileinfo | ConvertTo-Html -Fragment
             $htmlbody += $spacer
         }
-        catch
-        {
+        catch {
             Write-Warning $_.Exception.Message
             $htmlbody += "<p>An error was encountered. $($_.Exception.Message)</p>"
             $htmlbody += $spacer
@@ -261,21 +249,20 @@ Process
 
         Write-Verbose "Collecting BIOS information"
 
-        try
-        {
+        try {
             $biosinfo = Get-WmiObject Win32_Bios -ComputerName $ComputerName -ErrorAction STOP |
-                Select-Object Status,Version,Manufacturer,
-                            @{Name='Release Date';Expression={
-                                $releasedate = [datetime]::ParseExact($_.ReleaseDate.SubString(0,8),"yyyyMMdd",$null);
-                                $releasedate.ToShortDateString()
-                            }},
-                            @{Name='Serial Number';Expression={$_.SerialNumber}}
+            Select-Object Status, Version, Manufacturer,
+            @{Name = 'Release Date'; Expression = {
+                    $releasedate = [datetime]::ParseExact($_.ReleaseDate.SubString(0, 8), "yyyyMMdd", $null);
+                    $releasedate.ToShortDateString()
+                }
+            },
+            @{Name = 'Serial Number'; Expression = { $_.SerialNumber } }
 
             $htmlbody += $biosinfo | ConvertTo-Html -Fragment
             $htmlbody += $spacer
         }
-        catch
-        {
+        catch {
             Write-Warning $_.Exception.Message
             $htmlbody += "<p>An error was encountered. $($_.Exception.Message)</p>"
             $htmlbody += $spacer
@@ -291,18 +278,16 @@ Process
 
         Write-Verbose "Collecting logical disk information"
 
-        try
-        {
+        try {
             $diskinfo = Get-WmiObject Win32_LogicalDisk -ComputerName $ComputerName -ErrorAction STOP | 
-                Select-Object DeviceID,FileSystem,VolumeName,
-                @{Expression={$_.Size /1Gb -as [int]};Label="Total Size (GB)"},
-                @{Expression={$_.Freespace / 1Gb -as [int]};Label="Free Space (GB)"}
+            Select-Object DeviceID, FileSystem, VolumeName,
+            @{Expression = { $_.Size / 1Gb -as [int] }; Label = "Total Size (GB)" },
+            @{Expression = { $_.Freespace / 1Gb -as [int] }; Label = "Free Space (GB)" }
 
             $htmlbody += $diskinfo | ConvertTo-Html -Fragment
             $htmlbody += $spacer
         }
-        catch
-        {
+        catch {
             Write-Warning $_.Exception.Message
             $htmlbody += "<p>An error was encountered. $($_.Exception.Message)</p>"
             $htmlbody += $spacer
@@ -318,18 +303,16 @@ Process
 
         Write-Verbose "Collecting volume information"
 
-        try
-        {
+        try {
             $volinfo = Get-WmiObject Win32_Volume -ComputerName $ComputerName -ErrorAction STOP | 
-                Select-Object Label,Name,DeviceID,SystemVolume,
-                @{Expression={$_.Capacity /1Gb -as [int]};Label="Total Size (GB)"},
-                @{Expression={$_.Freespace / 1Gb -as [int]};Label="Free Space (GB)"}
+            Select-Object Label, Name, DeviceID, SystemVolume,
+            @{Expression = { $_.Capacity / 1Gb -as [int] }; Label = "Total Size (GB)" },
+            @{Expression = { $_.Freespace / 1Gb -as [int] }; Label = "Free Space (GB)" }
 
             $htmlbody += $volinfo | ConvertTo-Html -Fragment
             $htmlbody += $spacer
         }
-        catch
-        {
+        catch {
             Write-Warning $_.Exception.Message
             $htmlbody += "<p>An error was encountered. $($_.Exception.Message)</p>"
             $htmlbody += $spacer
@@ -345,24 +328,22 @@ Process
 
         Write-Verbose "Collecting network interface information"
 
-        try
-        {
+        try {
             $nics = @()
-            $nicinfo = @(Get-WmiObject Win32_NetworkAdapter -ComputerName $ComputerName -ErrorAction STOP | Where {$_.PhysicalAdapter} |
-                Select-Object Name,AdapterType,MACAddress,
-                @{Name='ConnectionName';Expression={$_.NetConnectionID}},
-                @{Name='Enabled';Expression={$_.NetEnabled}},
-                @{Name='Speed';Expression={$_.Speed/1000000}})
+            $nicinfo = @(Get-WmiObject Win32_NetworkAdapter -ComputerName $ComputerName -ErrorAction STOP | Where-Object { $_.PhysicalAdapter } |
+                Select-Object Name, AdapterType, MACAddress,
+                @{Name = 'ConnectionName'; Expression = { $_.NetConnectionID } },
+                @{Name = 'Enabled'; Expression = { $_.NetEnabled } },
+                @{Name = 'Speed'; Expression = { $_.Speed / 1000000 } })
 
             $nwinfo = Get-WmiObject Win32_NetworkAdapterConfiguration -ComputerName $ComputerName -ErrorAction STOP |
-                Select-Object Description, DHCPServer,  
-                @{Name='IpAddress';Expression={$_.IpAddress -join '; '}},  
-                @{Name='IpSubnet';Expression={$_.IpSubnet -join '; '}},  
-                @{Name='DefaultIPgateway';Expression={$_.DefaultIPgateway -join '; '}},  
-                @{Name='DNSServerSearchOrder';Expression={$_.DNSServerSearchOrder -join '; '}}
+            Select-Object Description, DHCPServer,  
+            @{Name = 'IpAddress'; Expression = { $_.IpAddress -join '; ' } },  
+            @{Name = 'IpSubnet'; Expression = { $_.IpSubnet -join '; ' } },  
+            @{Name = 'DefaultIPgateway'; Expression = { $_.DefaultIPgateway -join '; ' } },  
+            @{Name = 'DNSServerSearchOrder'; Expression = { $_.DNSServerSearchOrder -join '; ' } }
 
-            foreach ($nic in $nicinfo)
-            {
+            foreach ($nic in $nicinfo) {
                 $nicObject = New-Object PSObject
                 $nicObject | Add-Member NoteProperty -Name "Connection Name" -Value $nic.connectionname
                 $nicObject | Add-Member NoteProperty -Name "Adapter Name" -Value $nic.Name
@@ -371,7 +352,7 @@ Process
                 $nicObject | Add-Member NoteProperty -Name "Enabled" -Value $nic.Enabled
                 $nicObject | Add-Member NoteProperty -Name "Speed (Mbps)" -Value $nic.Speed
         
-                $ipaddress = ($nwinfo | Where {$_.Description -eq $nic.Name}).IpAddress
+                $ipaddress = ($nwinfo | Where-Object { $_.Description -eq $nic.Name }).IpAddress
                 $nicObject | Add-Member NoteProperty -Name "IPAddress" -Value $ipaddress
 
                 $nics += $nicObject
@@ -380,58 +361,55 @@ Process
             $htmlbody += $nics | ConvertTo-Html -Fragment
             $htmlbody += $spacer
         }
-        catch
-        {
+        catch {
             Write-Warning $_.Exception.Message
             $htmlbody += "<p>An error was encountered. $($_.Exception.Message)</p>"
             $htmlbody += $spacer
         }
 
 
-        #---------------------------------------------------------------------
-        # Collect software information and convert to HTML fragment
-        #---------------------------------------------------------------------
 
-        $subhead = "<h3>Software Information</h3>"
-        $htmlbody += $subhead
- 
-        Write-Verbose "Collecting software information"
+        if ($Collecting_Sofware_information) {
+                #---------------------------------------------------------------------
+                # Collect software information and convert to HTML fragment
+                #---------------------------------------------------------------------
+
+                $subhead = "<h3>Software Information</h3>"
+                $htmlbody += $subhead
         
-        try
-        {
-            $software = Get-WmiObject Win32_Product -ComputerName $ComputerName -ErrorAction STOP | Select-Object Vendor,Name,Version | Sort-Object Vendor,Name
-        
-            $htmlbody += $software | ConvertTo-Html -Fragment
-            $htmlbody += $spacer 
-        
-        }
-        catch
-        {
-            Write-Warning $_.Exception.Message
-            $htmlbody += "<p>An error was encountered. $($_.Exception.Message)</p>"
-            $htmlbody += $spacer
-        }
+                Write-Verbose "Collecting software information: takes some minutes to complete .... "
+                
+                try {
+                    $software = Get-WmiObject Win32_Product -ComputerName $ComputerName -ErrorAction STOP | Select-Object Vendor, Name, Version | Sort-Object Vendor, Name
+                
+                    $htmlbody += $software | ConvertTo-Html -Fragment
+                    $htmlbody += $spacer 
+                
+                }
+                catch {
+                    Write-Warning $_.Exception.Message
+                    $htmlbody += "<p>An error was encountered. $($_.Exception.Message)</p>"
+                    $htmlbody += $spacer
+                }
        
+        }
         #---------------------------------------------------------------------
         # Collect services information and covert to HTML fragment
-	# Added by Nicolas Nowinski (nicknow@nicknow.net): Mar 28 2019
         #---------------------------------------------------------------------		
 		
         $subhead = "<h3>Computer Services Information</h3>"
         $htmlbody += $subhead
 		
-	Write-Verbose "Collecting services information"
+        Write-Verbose "Collecting services information"
 
-	try
-	{
-            $services = Get-WmiObject Win32_Service -ComputerName $ComputerName -ErrorAction STOP  | Select-Object Name,StartName,State,StartMode | Sort-Object Name
+        try {
+            $services = Get-WmiObject Win32_Service -ComputerName $ComputerName -ErrorAction STOP | Select-Object Name, StartName, State, StartMode | Sort-Object Name
 
             $htmlbody += $services | ConvertTo-Html -Fragment
             $htmlbody += $spacer 
         
         }
-        catch
-        {
+        catch {
             Write-Warning $_.Exception.Message
             $htmlbody += "<p>An error was encountered. $($_.Exception.Message)</p>"
             $htmlbody += $spacer
@@ -446,7 +424,7 @@ Process
         $reportime = Get-Date
 
         #Common HTML head and styles
-	    $htmlhead="<html>
+        $htmlhead = "<html>
 				    <style>
 				    BODY{font-family: Arial; font-size: 8pt;}
 				    H1{font-size: 20px;}
@@ -461,7 +439,7 @@ Process
 				    td.info{background: #85D4FF;}
 				    </style>
 				    <body>
-				    <h1 align=""center"">Server Info: $ComputerName</h1>
+				    <h1 align=""center"">Computer Info: $ComputerName</h1>
 				    <h3 align=""center"">Generated: $reportime</h3>"
 
         $htmltail = "</body>
@@ -474,8 +452,7 @@ Process
 
 }
 
-End
-{
+End {
     #Wrap it up
     Write-Verbose "=====> Finished <====="
 }
