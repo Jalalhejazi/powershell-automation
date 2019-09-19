@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-Get-ServerInfo.ps1 - PowerShell script to collect information about Windows servers
+Get-WindowsInfo.ps1 - PowerShell script to collect information about Windows Operating System
 
 .DESCRIPTION 
 This PowerShell script runs a series of WMI and other queries to collect information
@@ -15,13 +15,14 @@ See more detailed progress as the script is running.
 
 .EXAMPLE
 
-Get-Help .\Get-ServerInfo.ps1 -Examples 
+Get-Help .\Get-WindowsInfo.ps1 -Examples 
 
 .EXAMPLE
-. .\Get-ServerInfo.ps1 -ComputerName $env:COMPUTERNAME -Verbose 
+
+. .\Get-WindowsInfo.ps1 -ComputerName $env:COMPUTERNAME -Verbose 
 
 VERBOSE: Initializing
-VERBOSE: =====> Processing JALAL-PC <=====
+VERBOSE: =====> Processing myWindowsPC <=====
 VERBOSE: Collecting computer system information
 VERBOSE: Collecting operating system information
 VERBOSE: Collecting physical memory information
@@ -37,18 +38,31 @@ VERBOSE: =====> Finished <=====
 
 
 .EXAMPLE
-"SERVER1","SERVER2","SERVER3" | .\Get-ServerInfo.ps1
+
 Collect information about multiple servers.
 
+Save a list of Servers in file using a variable
+"SERVER1","SERVER2","SERVER3" | Out-File -FilePath $myWindows
+
+Read the content of a file from a variable and pipe to ps1 script
+
+Get-Content $myWindows | .\Get-WindowsInfo.ps1
+
+
 .EXAMPLE
-Get-ADComputer -Filter {OperatingSystem -Like "Windows Server*"} | %{.\Get-ServerInfo.ps1 $_.DNSHostName}
-Collects information about all servers in Active Directory.
+
+Collects information about all Windows Servers in Active Directory.
+
+Get-ADComputer -Filter {OperatingSystem -Like "Windows Server*"} | 
+%{.\Get-WindowsInfo.ps1 $_.DNSHostName}
+
+
+Can Take a while.... 
 
 #>
 
 
 [CmdletBinding()]
-
 Param (
 
     [parameter(ValueFromPipeline=$True)]
