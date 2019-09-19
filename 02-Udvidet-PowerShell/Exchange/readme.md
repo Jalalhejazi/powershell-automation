@@ -13,12 +13,6 @@
 
 
 
-
-## Office 365 Services
-- [Connect to Office 365 Services using PowerShell](https://gallery.technet.microsoft.com/Connect-to-Office-53f6eb07)
-
-
-
 ## Powershell-Exchange on gitHub
 
 This repo contains a variety of PowerShell scripts and code samples for Microsoft Exchange Server.
