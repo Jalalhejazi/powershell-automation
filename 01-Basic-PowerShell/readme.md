@@ -1,6 +1,6 @@
 # Dag 1:  Basic PowerShell 
 
-<a href="powershell-notes/readme.md">notes</a>
+- ./powershell-notes/readme.md 
 
 
 ## Using the $Profile
