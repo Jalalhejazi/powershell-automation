@@ -1,6 +1,22 @@
 # Dag 1:  Basic PowerShell 
 
-- ./powershell-notes/readme.md 
+## Setup windows correct for automation (Best practices)
+
+First we need the missing apt-get install for windows
+- Use package management to install tools and keep your tools up to date.
+  - [Scoop is a command-line installer for Windows](https://scoop.sh/)
+  - scoop install pwsh          # install powershell cross-platform version
+  - scoop install vscode        # install visual studio code 
+
+- Use Visual Studio with Powershell for IntelliSense and Debug
+  - code --install-extension ms-vscode.PowerShell --force 
+  - 
+
+
+
+## Basic PowerShell 
+
+- Follow the ./powershell-notes/readme.md 
 
 
 ## Using the $Profile
