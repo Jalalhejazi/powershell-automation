@@ -10,7 +10,7 @@ in powershell
 #>
 ```
 
->The Basic syntax of powershell commands is __Verd-Noun__.<br/> 
+>The Basic syntax of powershell commands is __Verb-Noun__.<br/> 
 
 ```powershell
 #To get help for any cmdlet in powershell 
