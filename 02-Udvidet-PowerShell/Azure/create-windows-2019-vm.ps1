@@ -1,7 +1,6 @@
 ## Create Windows 2019 Datacenter VM on Azure
+## use https://shell.azure.com/powershell
 
-
-## az login  
 
 az group create -l westeurope -n vm
 
