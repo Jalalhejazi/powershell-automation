@@ -14,4 +14,3 @@ az vm create `
     --admin-password $secret
 
 az vm open-port --port 3389 --resource-group vm --name win2019
-
