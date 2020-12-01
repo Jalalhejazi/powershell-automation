@@ -1,4 +1,4 @@
-## Special PowerShell kursus for Pharmakon
+## Special PowerShell optimized for Cloud
 
 - We start with the basics
 - Some inspirations
