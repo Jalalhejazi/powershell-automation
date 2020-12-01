@@ -4,7 +4,7 @@
 
 az group create -l westeurope -n vm
 
-$secret = "The password length must be between 12 and 123"
+$secret = "The password length must be between 12 and 123 and Complex"
 
 az vm create `
     --resource-group vm `
