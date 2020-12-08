@@ -1,14 +1,3 @@
-$versionMinimum = [Version]'5.1.18362.1171'
-
-if ($versionMinimum -gt $PSVersionTable.PSVersion)
-{ throw "This script requires PowerShell $versionMinimum" }
-
-"Requires version $versionMinimum"
-"Running PowerShell $($PSVersionTable.PSVersion)."
-
-
-
-
 <#
 .SYNOPSIS
 Get-WindowsInfo.ps1 - PowerShell script to collect information about Windows Operating System
