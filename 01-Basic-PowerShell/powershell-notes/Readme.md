@@ -26,12 +26,13 @@ start powershell as admin user:
 - [Variables, Operators, TypeCasting](building_blocks.md)
 - [Read Validate and Write](read_validate.md)
 - [Comparison Operators](comparison.md)
+- ....................................
 - [If else and Switch](conditional.md)
 - [Collections](collections.md)
 - [Loops](loops.md)
 - [Functions](functions.md)
 - [Processes and Services](process_and_service.md)
-
+- [Debugging](debug/demo01.ps1)
 
 
 ## References
