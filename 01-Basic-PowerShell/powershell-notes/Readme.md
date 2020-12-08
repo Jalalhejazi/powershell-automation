@@ -25,7 +25,7 @@ start powershell as admin user:
 - [Overview](overview.md)
 - [Variables, Operators, TypeCasting](building_blocks.md)
 - [Read Validate and Write](read_validate.md)
-- [Comparision Operators](comparison.md)
+- [Comparison Operators](comparison.md)
 - [If else and Switch](conditional.md)
 - [Collections](collections.md)
 - [Loops](loops.md)
