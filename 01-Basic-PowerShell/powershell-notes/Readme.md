@@ -35,7 +35,7 @@ start powershell as admin user:
 
 
 ## References
-- [Microsoft PowerShell Resource](https://docs.microsoft.com/en-us/powershell/scripting/powershell-scripting?view=powershell-6)
+- [Microsoft PowerShell Resource](https://docs.microsoft.com/en-us/powershell)
 - [CheatSheet](https://ss64.com/ps/)
 
 
