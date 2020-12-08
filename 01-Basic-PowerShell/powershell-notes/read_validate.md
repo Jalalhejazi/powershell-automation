@@ -15,7 +15,7 @@ echo "Your name is : $name"
 echo "Your age is: $age"
 echo "date: $date"
 echo "$response"
-echo "passwotrd is: $password"
+echo "password is: $password"
 ```
 > If you're generally prinitng the data to console and you've no intention to use advanced features of powershell like pipeline then go with `Write-Host` or else go with `Write-Output`
 
