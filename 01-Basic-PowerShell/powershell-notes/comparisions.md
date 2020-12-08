@@ -34,6 +34,6 @@
 
 # Match operator automatically generate a $matches variable
 "Sunday" -match "sun" #True
-$matches # Sun
+
 ```
 [Comparison Operators reference](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-6)
