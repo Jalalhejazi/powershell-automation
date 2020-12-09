@@ -40,7 +40,7 @@ function My-Info {
     )
     Write-Output "Hey! My name is $name and I am $age years old. I came from $country"
 }
-My-Info -name "Jalal Hejazi" -age 44 -country "Danmark"
-My-Info -age 33 -name "Anja" -country "Danmark" 
-My-Info -name "Nadine" -age 17
+My-Info -name "Human"  -age 44 -country "Danmark"
+My-Info -name "Anja"   -age 33 -country "USA" 
+My-Info -name "Nadine" -age 18 -country "Greenland" 
 ```
