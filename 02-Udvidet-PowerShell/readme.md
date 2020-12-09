@@ -1,9 +1,12 @@
-## Dag 2:  Udvidet
+## 2 days PowerShell with more advanced features
 
-- Azure-cli administration
+Must have
+- **Azure-cli administration**
+- **Windows administration**
+
+Nice to have:
 - DBA SQLServer 
 - DEV dotnet 
 - Exchange (mailbox)
 - Office360  
-- Windows 
 
