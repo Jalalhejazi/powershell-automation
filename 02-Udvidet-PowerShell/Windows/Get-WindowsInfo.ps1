@@ -6,7 +6,8 @@ Get-WindowsInfo.ps1 - PowerShell script to collect information about Windows Ope
 This PowerShell script runs a series of WMI and other queries to collect information
 about Windows servers. 
 
-#requires -version 5.1
+#Requires -version 5.1
+#Requires -RunAsAdministrator
 
 .OUTPUTS
 Each server's results are output to HTML.
