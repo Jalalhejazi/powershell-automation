@@ -1,5 +1,5 @@
 
-## [Basic PowerShell ](./powershell-notes/readme.md) 
+## [Basic PowerShell in 3 days ](./powershell-notes/readme.md) 
 
 
 
