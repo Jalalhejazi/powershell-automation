@@ -34,7 +34,6 @@ start powershell as admin user:
 - [Functions](functions.md)
 - [Processes and Services](process_and_service.md)
 - [Debugging](debug/demo01.ps1)
-- ....................................
 
 
 ## References
