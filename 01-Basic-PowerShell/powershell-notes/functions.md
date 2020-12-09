@@ -12,7 +12,7 @@ Say-Hello
 
 # Adding two numbers which are passed as arguments
 function Add-Numbers {
-    $total = $args[0] + $args[1]
+    $total = $args[0] + $args[1]  # + $args[2..10]
     Write-Output "Total: $total"
 }
 
@@ -32,15 +32,15 @@ Add-Numbers $nums #[OUTPUT] Total: 21
 
 # Named Parameters/arguments to the function
 # In case while calling function if you dont provide any country then by default is MARVEL
-function My-Info {
+function Get-Info {
     param(
         [string]$name,
         [int]$age,
-        [string]$country = "MARVEL"
+        [string]$country = "Greenland"
     )
     Write-Output "Hey! My name is $name and I am $age years old. I came from $country"
 }
-My-Info -name "Human"  -age 44 -country "Danmark"
-My-Info -name "Anja"   -age 33 -country "USA" 
-My-Info -name "Nadine" -age 18 -country "Greenland" 
+Get-Info -name "Human"  -age 44 -country "Danmark"
+Get-Info -name "Anja"   -age 33 -country "USA" 
+Get-Info -name "Nadine" -age 18 
 ```

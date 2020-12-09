@@ -1,7 +1,7 @@
 ## Array
 ```powershell
 # array declaration 1
-$a = 10, 20, "my array", "Sample", 30, 40
+$a = 10, 20, "my array", "Sample", 30, 40 
 # array declaration 2
 $b = @(10,20, "my-array")
 
@@ -10,18 +10,33 @@ $a[0] # [OUTPUT] 10
 $a[1] # [OUTPUT] 20
 $a[2] # [OUTPUT] my array
 
+$a[0..1000]
+
+
 #Methods available on array using Get-Member
-$a | Get-Member
+$a | Get-Member 
 
 # To access a range of elements from an array
 Write-Output "The length of array a is " $a[1..3] #[OUTPUT] 20, my array, Sample
 
 # To get the size of an array
-Write-Output "The length of array a is " $a.Length #[OUTPUT] 6
+Write-Output "The length of array a is " $a.Length
 
 # To join/combine/add two arrays
 $c = $a + $b 
 $c.Length # [OUTPUT] 9
+$c
+
+## filesystem
+
+$dir1 = ls C:\dev\practical-powershell\01-Basic-PowerShell\powershell-notes\*.md
+$dir2 = ls C:\dev\practical-powershell\02-Udvidet-PowerShell\*.md -Recurse
+
+$alle_md =  $dir1 + $dir2
+$alle_md.Count
+
+$alle_md[0..100]
+
 
 # To know the index of the given value in an array
 $a.IndexOf("Sample") # [OUTPUT] 3
@@ -37,6 +52,7 @@ $a.IsFixedSize #[OUTPUT] True
 ## ArrayList
 ```powershell
 # To create an ArrayList
+# New-Object er mest hvis man er udvikler med C#
 $names = New-Object System.Collections.ArrayList
 
 # Adding a single element into an ArrayList
@@ -61,9 +77,9 @@ $names.IsFixedSize #[OUTPUT] False
 ```powershell
 # Hash Table
 $my_bio = @{
-    "name" = "Black Panther";
-    "age" = 30;
-    "country" = "Wakanda";
+    "name"      = "Black Panther";
+    "age"       = 30;
+    "country"   = "Wakanda";
 }
 
 # To Know the number of items in hash table
@@ -84,3 +100,14 @@ $my_bio.Add("Original Name", "T'Challa")
 # To Remove a key-value pair from hash table
 $my_bio.Remove("Original Name")
 ```
+
+### Install tools 
+
+$my_tools = @{
+    "7zip"      = "scoop install 7zip" ;
+    "git"       = "scoop install git"  ;
+    "sudo"      = "scoop install sudo" ;
+}
+
+$my_tools
+    
