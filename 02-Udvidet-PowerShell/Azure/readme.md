@@ -4,12 +4,7 @@
 
     az --help
 
-- [how to start using azure-cli](https://learning-azure.azurewebsites.net/azure-cli/)
-
-
-## Azure docs powershell samples
-
-- [azure-docs-powershell-samples](https://github.com/Azure/azure-docs-powershell-samples)
+- [Azure deployment using AZ and PowerShell](https://dev.azure.com/superusers-kursus/_git/deployment?path=%2Fwebapp-snippets%2Fazuredeploy.ps1)
 
 
 
