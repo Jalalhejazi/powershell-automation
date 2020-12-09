@@ -374,6 +374,7 @@ Process {
         if ($Collecting_Sofware_information) {
                 #---------------------------------------------------------------------
                 # Collect software information and convert to HTML fragment
+                # TODO: Get-AppxPackage
                 #---------------------------------------------------------------------
 
                 $subhead = "<h3>Software Information</h3>"
