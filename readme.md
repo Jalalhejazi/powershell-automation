@@ -8,7 +8,6 @@
 - The best way to learn PowerShell is to automate **Cloud Resources**
   - Create/connect Windows Virtual Machines 
   - Create/connect Linux (Ubuntu)  
-  - Create anything on cloud using PowerShell Functions and Scripts
   - Automate everything you can.
 
 - Start using PowerShell and stop using "Windows powershell"
