@@ -2,10 +2,8 @@
 
 - We start with the basics in 3 days
 - Some Advanced features in 2 days
-- Best Practices from DevOps automation 
 
-
-# Best Practice 
+# Best Practices from DevOps automation
 
 - The best way to learn PowerShell is to automate **Cloud Resources**
   - Create/connect Windows Virtual Machines 
