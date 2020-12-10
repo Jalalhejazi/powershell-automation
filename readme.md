@@ -22,6 +22,7 @@
 - Do Not repeat Yourself (DRY)
   - use Variables
   - use Functions
-  - use $profile
+  - use [$profile](https://dev.azure.com/superusers-kursus/learning-powershell/_wiki/wikis/kursus-powershell.wiki/750/Profile)
+  
 
 
