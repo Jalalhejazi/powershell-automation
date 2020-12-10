@@ -9,6 +9,9 @@ about Windows servers.
 #Requires -version 5.1
 #Requires -RunAsAdministrator
 
+.TODO
+    Get-CimInstance -ClassName Win32_ComputerSystem Works in 7.1 and 5.1
+
 .OUTPUTS
 Each server's results are output to HTML.
 
@@ -64,6 +67,10 @@ Can Take a while....
 #>
 
 
+# CmdletBinding() --> betyder nedarve fra dotnet alt hvad er godt
+# -verbose
+# -debug
+# -ErrorAction
 [CmdletBinding()]
 Param (
 
@@ -71,19 +78,16 @@ Param (
     [string[]]$ComputerName,
 
     [switch] $Collecting_Sofware_information
-
-
 )
 
 Begin {
     #Initialize
     Write-Verbose "Initializing"
-
 }
 
 Process {
     #---------------------------------------------------------------------
-    # Process each ComputerName
+    # Process each ComputerName (foreach computerName from Pipeline)
     #---------------------------------------------------------------------
 
     if (!($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent)) {
@@ -374,7 +378,8 @@ Process {
         if ($Collecting_Sofware_information) {
                 #---------------------------------------------------------------------
                 # Collect software information and convert to HTML fragment
-                # TODO: Get-AppxPackage
+                # TODO: Get-AppxPackage on windows 10 ?
+                # TODO: Get-AppxPackage on windows server ?
                 #---------------------------------------------------------------------
 
                 $subhead = "<h3>Software Information</h3>"
@@ -424,26 +429,26 @@ Process {
 	
         Write-Verbose "Producing HTML report"
     
-        $reportime = Get-Date
+        $reportime = Get-Date 
 
         #Common HTML head and styles
         $htmlhead = "<html>
 				    <style>
-				    BODY{font-family: Arial; font-size: 8pt;}
-				    H1{font-size: 20px;}
-				    H2{font-size: 18px;}
-				    H3{font-size: 16px;}
-				    TABLE{border: 1px solid black; border-collapse: collapse; font-size: 8pt;}
-				    TH{border: 1px solid black; background: #dddddd; padding: 5px; color: #000000;}
-				    TD{border: 1px solid black; padding: 5px; }
-				    td.pass{background: #7FFF00;}
-				    td.warn{background: #FFE600;}
-				    td.fail{background: #FF0000; color: #ffffff;}
-				    td.info{background: #85D4FF;}
+                            BODY{font-family: Arial; font-size: 8pt;}
+                            H1{font-size: 20px;}
+                            H2{font-size: 18px;}
+                            H3{font-size: 16px;}
+                            TABLE{border: 1px solid black; border-collapse: collapse; font-size: 8pt;}
+                            TH{border: 1px solid black; background: #dddddd; padding: 5px; color: #000000;}
+                            TD{border: 1px solid black; padding: 5px; }
+                            td.pass{background: #7FFF00;}
+                            td.warn{background: #FFE600;}
+                            td.fail{background: #FF0000; color: #ffffff;}
+                            td.info{background: #85D4FF;}
 				    </style>
 				    <body>
-				    <h1 align=""center"">Computer Info: $ComputerName</h1>
-				    <h3 align=""center"">Generated: $reportime</h3>"
+                        <h1 align=""center"">Computer Info: $ComputerName</h1>
+                        <h3 align=""center"">Generated: $reportime</h3>"
 
         $htmltail = "</body>
 			    </html>"
