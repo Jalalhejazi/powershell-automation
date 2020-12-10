@@ -1,4 +1,4 @@
-## Special PowerShell optimized for Cloud
+## Special PowerShell Training Optimized for Cloud Computing
 
 - We start with the basics in 3 days
 - Some Advanced features in 2 days
