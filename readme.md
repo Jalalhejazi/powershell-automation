@@ -19,7 +19,7 @@
 - Never store secrets in scripts !
 - Never store keys in scripts !
 
-- Do Not Repeat yourself (DRY)
+- Do Not repeat Yourself (DRY)
   - use Variables
   - use Functions
   - use $profile
