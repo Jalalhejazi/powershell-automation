@@ -8,10 +8,9 @@ about Windows servers.
 
 #Requires -RunAsAdministrator
 
-.DONE
-    # Chaning from Get-WMIObject to Get-CimInstance  
-    - WMIObject is deprecated technology (windows only)
-    - CimInstance is current technology (cloud)
+# Chaning from Get-WMIObject to Get-CimInstance  
+- WMIObject is deprecated technology (windows only)
+- CimInstance is current technology (cloud)
     
 
 .OUTPUTS
