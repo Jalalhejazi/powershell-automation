@@ -61,7 +61,7 @@ function connect-to-windows {
 connect-to-windows -ComputerName 192.168.8.101 -UserName kursist -setup
 
 .EXAMPLE
-connect-to-windows -ComputerName dev2020.westeurope.cloudapp.azure -UserName sysadmin
+connect-to-windows -ComputerName dev2020.westeurope.cloudapp.azure.com -UserName sysadmin
 
 #>
     
