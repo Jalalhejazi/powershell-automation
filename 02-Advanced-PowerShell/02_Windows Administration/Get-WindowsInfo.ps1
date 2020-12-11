@@ -6,11 +6,13 @@ Get-WindowsInfo.ps1 - PowerShell script to collect information about Windows Ope
 This PowerShell script runs a series of WMI and other queries to collect information
 about Windows servers. 
 
-#Requires -version 5.1
 #Requires -RunAsAdministrator
 
-.TODO
-    Get-CimInstance -ClassName Win32_ComputerSystem Works in 7.1 and 5.1
+.DONE
+    # Chaning from Get-WMIObject to Get-CimInstance  
+    - WMIObject is deprecated technology (windows only)
+    - CimInstance is current technology (cloud)
+    
 
 .OUTPUTS
 Each server's results are output to HTML.
@@ -134,7 +136,7 @@ Process {
         $htmlbody += $subhead
     
         try {
-            $csinfo = Get-WmiObject Win32_ComputerSystem -ComputerName $ComputerName -ErrorAction STOP |
+            $csinfo = Get-CimInstance Win32_ComputerSystem -ComputerName $ComputerName -ErrorAction STOP |
             Select-Object Name, Manufacturer, Model,
             @{Name = 'Physical Processors'; Expression = { $_.NumberOfProcessors } },
             @{Name = 'Logical Processors'; Expression = { $_.NumberOfLogicalProcessors } },
@@ -167,7 +169,7 @@ Process {
         $htmlbody += $subhead
     
         try {
-            $osinfo = Get-WmiObject Win32_OperatingSystem -ComputerName $ComputerName -ErrorAction STOP | 
+            $osinfo = Get-CimInstance Win32_OperatingSystem -ComputerName $ComputerName -ErrorAction STOP | 
             Select-Object @{Name = 'Operating System'; Expression = { $_.Caption } },
             @{Name = 'Architecture'; Expression = { $_.OSArchitecture } },
             Version, Organization,
@@ -199,7 +201,7 @@ Process {
 
         try {
             $memorybanks = @()
-            $physicalmemoryinfo = @(Get-WmiObject Win32_PhysicalMemory -ComputerName $ComputerName -ErrorAction STOP |
+            $physicalmemoryinfo = @(Get-CimInstance Win32_PhysicalMemory -ComputerName $ComputerName -ErrorAction STOP |
                 Select-Object DeviceLocator, Manufacturer, Speed, Capacity)
 
             foreach ($bank in $physicalmemoryinfo) {
@@ -232,7 +234,7 @@ Process {
         Write-Verbose "Collecting pagefile information"
 
         try {
-            $pagefileinfo = Get-WmiObject Win32_PageFileUsage -ComputerName $ComputerName -ErrorAction STOP |
+            $pagefileinfo = Get-CimInstance Win32_PageFileUsage -ComputerName $ComputerName -ErrorAction STOP |
             Select-Object @{Name = 'Pagefile Name'; Expression = { $_.Name } },
             @{Name = 'Allocated Size (Mb)'; Expression = { $_.AllocatedBaseSize } }
 
@@ -256,7 +258,7 @@ Process {
         Write-Verbose "Collecting BIOS information"
 
         try {
-            $biosinfo = Get-WmiObject Win32_Bios -ComputerName $ComputerName -ErrorAction STOP |
+            $biosinfo = Get-CimInstance Win32_Bios -ComputerName $ComputerName -ErrorAction STOP |
             Select-Object Status, Version, Manufacturer,
             @{Name = 'Release Date'; Expression = {
                     $releasedate = [datetime]::ParseExact($_.ReleaseDate.SubString(0, 8), "yyyyMMdd", $null);
@@ -285,7 +287,7 @@ Process {
         Write-Verbose "Collecting logical disk information"
 
         try {
-            $diskinfo = Get-WmiObject Win32_LogicalDisk -ComputerName $ComputerName -ErrorAction STOP | 
+            $diskinfo = Get-CimInstance Win32_LogicalDisk -ComputerName $ComputerName -ErrorAction STOP | 
             Select-Object DeviceID, FileSystem, VolumeName,
             @{Expression = { $_.Size / 1Gb -as [int] }; Label = "Total Size (GB)" },
             @{Expression = { $_.Freespace / 1Gb -as [int] }; Label = "Free Space (GB)" }
@@ -310,7 +312,7 @@ Process {
         Write-Verbose "Collecting volume information"
 
         try {
-            $volinfo = Get-WmiObject Win32_Volume -ComputerName $ComputerName -ErrorAction STOP | 
+            $volinfo = Get-CimInstance Win32_Volume -ComputerName $ComputerName -ErrorAction STOP | 
             Select-Object Label, Name, DeviceID, SystemVolume,
             @{Expression = { $_.Capacity / 1Gb -as [int] }; Label = "Total Size (GB)" },
             @{Expression = { $_.Freespace / 1Gb -as [int] }; Label = "Free Space (GB)" }
@@ -336,13 +338,13 @@ Process {
 
         try {
             $nics = @()
-            $nicinfo = @(Get-WmiObject Win32_NetworkAdapter -ComputerName $ComputerName -ErrorAction STOP | Where-Object { $_.PhysicalAdapter } |
+            $nicinfo = @(Get-CimInstance Win32_NetworkAdapter -ComputerName $ComputerName -ErrorAction STOP | Where-Object { $_.PhysicalAdapter } |
                 Select-Object Name, AdapterType, MACAddress,
                 @{Name = 'ConnectionName'; Expression = { $_.NetConnectionID } },
                 @{Name = 'Enabled'; Expression = { $_.NetEnabled } },
                 @{Name = 'Speed'; Expression = { $_.Speed / 1000000 } })
 
-            $nwinfo = Get-WmiObject Win32_NetworkAdapterConfiguration -ComputerName $ComputerName -ErrorAction STOP |
+            $nwinfo = Get-CimInstance Win32_NetworkAdapterConfiguration -ComputerName $ComputerName -ErrorAction STOP |
             Select-Object Description, DHCPServer,  
             @{Name = 'IpAddress'; Expression = { $_.IpAddress -join '; ' } },  
             @{Name = 'IpSubnet'; Expression = { $_.IpSubnet -join '; ' } },  
@@ -388,7 +390,7 @@ Process {
                 Write-Verbose "Collecting software information: takes some minutes to complete .... "
                 
                 try {
-                    $software = Get-WmiObject Win32_Product -ComputerName $ComputerName -ErrorAction STOP | Select-Object Vendor, Name, Version | Sort-Object Vendor, Name
+                    $software = Get-CimInstance Win32_Product -ComputerName $ComputerName -ErrorAction STOP | Select-Object Vendor, Name, Version | Sort-Object Vendor, Name
                 
                     $htmlbody += $software | ConvertTo-Html -Fragment
                     $htmlbody += $spacer 
@@ -411,7 +413,7 @@ Process {
         Write-Verbose "Collecting services information"
 
         try {
-            $services = Get-WmiObject Win32_Service -ComputerName $ComputerName -ErrorAction STOP | Select-Object Name, StartName, State, StartMode | Sort-Object Name
+            $services = Get-CimInstance Win32_Service -ComputerName $ComputerName -ErrorAction STOP | Select-Object Name, StartName, State, StartMode | Sort-Object Name
 
             $htmlbody += $services | ConvertTo-Html -Fragment
             $htmlbody += $spacer 
