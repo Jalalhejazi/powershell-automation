@@ -68,7 +68,7 @@ connect-to-windows -ComputerName dev2020.westeurope.cloudapp.azure -UserName sys
     [CmdletBinding()]
     param(
         
-        [Parameter(Mandatory = $true)] [string] $ComputerName = "dev2020.westeurope.cloudapp.azure",
+        [Parameter(Mandatory = $true)] [string] $ComputerName = "dev2020.westeurope.cloudapp.azure.com",
         [Parameter(Mandatory = $true)] [string] $UserName = "sysadmin"  ,
         [Parameter(Mandatory = $false)][switch] $setup    
     )
