@@ -25,6 +25,7 @@ start powershell as admin user:
 
 ## Get Help 
 - Get-Help about_* 
+- Get-Help about_Profiles
 - Get-Help about_*  > ./powershell_help.txt
 - Get-Help about_PowerShell.exe 
 - Get-Help about_help
