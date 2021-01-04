@@ -1,4 +1,11 @@
-# <center>PowerShell</center>
+
+# Windows PowerShell vs. PowerShell
+
+- Windows powershell  (Latest version 5.x)
+- PowerShell          (Cloud optimized) === (Linux og Windows)
+
+
+
 
 * The Basic syntax of powershell is **Verb-Noun**
 
