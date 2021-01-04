@@ -4,6 +4,10 @@
 - Windows powershell  (Latest version 5.x)
 - PowerShell          (Cloud optimized) === (Linux og Windows)
 
+Create $profile for first time
+```powershell
+New-Item -Path $PROFILE -ItemType File -Force
+```
 
 
 
