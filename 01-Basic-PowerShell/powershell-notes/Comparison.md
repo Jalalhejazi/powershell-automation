@@ -32,6 +32,10 @@
 "Bash", "PowerShell" -contains "Shell" # False 
 "Bash", "PowerShell" -notcontains "Shell" # True
 
+# Get Data from Windows Services
+$data = Get-Service | select name
+$data -contains "WinRM"
+
 # Match operator automatically generate a $matches variable
 "Sunday" -match "sun" #True
 $matches # Sun
