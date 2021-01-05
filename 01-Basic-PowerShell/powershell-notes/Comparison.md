@@ -33,7 +33,7 @@
 "Bash", "PowerShell" -notcontains "Shell" # True
 
 # Get Data from Windows Services
-$data = Get-Service | select name
+$data = Get-Service -ErrorAction SilentlyContinue  | select name
 $data.name -contains "WinRM"
 
 # Match operator automatically generate a $matches variable
