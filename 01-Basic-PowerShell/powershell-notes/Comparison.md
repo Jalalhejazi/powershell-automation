@@ -34,7 +34,7 @@
 
 # Get Data from Windows Services
 $data = Get-Service | select name
-$data -contains "WinRM"
+$data.name -contains "WinRM"
 
 # Match operator automatically generate a $matches variable
 "Sunday" -match "sun" #True
