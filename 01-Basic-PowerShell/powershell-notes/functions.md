@@ -31,7 +31,7 @@ $nums = @(1,2,3,4,5,6)
 Add-Numbers $nums #[OUTPUT] Total: 21
 
 # Named Parameters/arguments to the function
-# In case while calling function if you dont provide any country then by default is MARVEL
+# In case while calling function if you dont provide any country then by default is Greenland
 function Get-Info {
     param(
         [string]$name,
