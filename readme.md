@@ -1,7 +1,18 @@
+
 ## Special PowerShell Training Optimized for Cloud Computing
 
 - We start with the basics in 3 days
 - Some Advanced features in 2 days
+
+
+```powershell
+$url = "https://superusers-kursus@dev.azure.com/superusers-kursus/learning-powershell/_git/practical-powershell"
+
+git clone $url
+
+```
+
+
 
 # Best Practices from DevOps automation
 
