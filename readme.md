@@ -9,7 +9,6 @@
 $url = "https://superusers-kursus@dev.azure.com/superusers-kursus/learning-powershell/_git/practical-powershell"
 
 git clone $url
-
 ```
 
 
