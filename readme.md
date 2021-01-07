@@ -10,7 +10,7 @@ $url = "https://superusers-kursus@dev.azure.com/superusers-kursus/learning-power
 
 git clone $url
 
-cd https://dev.azure.com/superusers-kursus/learning-powershell/
+cd learning-powershell
 
 code .
 ```
