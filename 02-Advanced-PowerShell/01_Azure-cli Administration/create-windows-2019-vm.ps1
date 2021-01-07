@@ -1,19 +1,31 @@
 ## Create Windows 2019 Datacenter VM on Azure
 ## use https://shell.azure.com/powershell
 
+# Ask user for input dependency
+param (
+    $groupName = "vm",
+    $location  = "westeurope",
+    $vmName    = "win2019"
+)
 
-az group create -l westeurope -n vm
+# Define VM create rules
+function New-AzureVM {
+    az group create --location $location --name $groupName
+    $secret = get-azure-secret -secretName sysadmin
 
-$secret = "The password length must be between 12 and 123 and Complex"
+    $status = az vm create          `
+        --resource-group $groupName `
+        --name $vmName              `
+        --image win2019datacenter   `
+        --admin-username sysadmin   `
+        --admin-password "$secret!$secret"
 
-$status = az vm create `
-    --resource-group vm `
-    --name win2019 `
-    --image win2019datacenter `
-    --admin-username sysadmin `
-    --admin-password $secret
+    az vm open-port --port 3389 --resource-group vm --name $vmName
 
-az vm open-port --port 3389 --resource-group vm --name win2019
+    echo $status
+}
 
-echo $status
+
+# Execute
+New-AzureVM
 
