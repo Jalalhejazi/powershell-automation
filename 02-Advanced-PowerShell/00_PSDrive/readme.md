@@ -6,6 +6,8 @@
 get-command -noun psdrive
 
 Get-PSDrive
+Get-PSProvider
+
 ls alias:
 ls c:
 ls env:
@@ -22,6 +24,17 @@ cd env:
 
 help New-PSDrive -online
 help New-PSDrive -examples
+
+
+$config = @{
+    Name = "MyDocs"
+    PSProvider = "FileSystem"
+    Root = "C:\Users\User01\Documents"
+    Description = "Maps to my My Documents folder."
+}
+New-PSDrive @config
+
+
 
 $connectTestResult = Test-NetConnection -ComputerName superusers2020.file.core.windows.net -Port 445
 
