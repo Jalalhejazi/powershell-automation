@@ -55,15 +55,20 @@ Read the content of a file from a variable and pipe to ps1 script
 Get-Content $myWindows | .\Get-WindowsInfo.ps1
 
 
+.EXAMPLE 
+
+Collect information about multiple servers.
+
+"SERVER1","SERVER2","SERVER3" | .\Get-WindowsInfo.ps1 -Collecting_Sofware_information
+
+
+
 .EXAMPLE
 
 Collects information about all Windows Servers in Active Directory.
 
 Get-ADComputer -Filter {OperatingSystem -Like "Windows Server*"} | 
-%{.\Get-WindowsInfo.ps1 $_.DNSHostName}
-
-
-Can Take a while.... 
+ForEach-object{.\Get-WindowsInfo.ps1 $_.DNSHostName}
 
 #>
 
