@@ -33,6 +33,15 @@ start powershell as admin user:
 
 ## Get Help 
 - Get-Help about_* 
+
+```powershell
+
+Get-Help about_* | out-file c:\dev\powershell_help.txt
+
+```
+
+
+
 - Get-Help about_Profiles
 - Get-Help about_*  > ./powershell_help.txt
 - Get-Help about_PowerShell.exe 
