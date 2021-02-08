@@ -14,6 +14,12 @@ New-Item -Path $PROFILE -ItemType File -Force
 - https://code.visualstudio.com/download
 
 
+```powershell
+code $profile
+```
+
+
+
 
 ## Download Help files
 
