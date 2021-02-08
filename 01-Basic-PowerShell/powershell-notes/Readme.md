@@ -9,12 +9,11 @@ Create $profile for first time
 New-Item -Path $PROFILE -ItemType File -Force
 ```
 
-# PowerShell Editor
+## PowerShell Editor
 
 - https://code.visualstudio.com/download
 
 
-* The Basic syntax of powershell is **Verb-Noun**
 
 ## Download Help files
 
