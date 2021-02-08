@@ -29,6 +29,8 @@ Download and installs the newest help files on your computer.
 
 start powershell as admin user:
 - Update-Help -ErrorAction Ignore 
+- Update-Help -ErrorAction Ignore -UICulture en-US
+
 
 
 ## Get Help 
