@@ -19,6 +19,11 @@ code $profile
 ```
 
 
+## Sharing Instructor Profile
+
+- https://dev.azure.com/superusers-kursus/powershell
+
+
 
 
 ## Download Help files
