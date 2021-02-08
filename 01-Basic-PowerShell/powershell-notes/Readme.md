@@ -46,7 +46,6 @@ Get-Help about_* | out-file c:\dev\powershell_help.txt
 - Get-Help about_*  > ./powershell_help.txt
 - Get-Help about_Profiles
 - Get-Help about_Aliases
-- Get-Module -ListAvailable
 
 
 ## Contents
