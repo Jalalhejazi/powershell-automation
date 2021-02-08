@@ -1,5 +1,5 @@
 
-# Windows PowerShell vs. PowerShell
+# Windows PowerShell (5.1 legacy) vs. PowerShell (7.1 Cloud)
 
 - Windows powershell  (Latest version 5.x)
 - PowerShell          (Cloud optimized) === (Linux og Windows)
