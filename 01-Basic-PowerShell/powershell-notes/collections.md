@@ -17,7 +17,7 @@ $a[0..1000]
 $a | Get-Member 
 
 # To access a range of elements from an array
-Write-Output "The length of array a is " $a[1..3] #[OUTPUT] 20, my array, Sample
+Write-Output "The content of array a is " $a[1..3] #[OUTPUT] 20, my array, Sample
 
 # To get the size of an array
 Write-Output "The length of array a is " $a.Length
