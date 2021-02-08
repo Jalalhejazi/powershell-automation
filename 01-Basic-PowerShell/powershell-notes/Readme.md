@@ -1,7 +1,7 @@
 
 # Windows PowerShell (5.1 legacy) vs. PowerShell (7.1 Cloud)
 
-- Windows powershell  (Latest version 5.x)
+- ~~Windows powershell~~  (Latest version 5.x)
 - PowerShell          (Cloud optimized) === (Linux og Windows)
 
 Create $profile for first time
