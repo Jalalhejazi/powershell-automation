@@ -63,6 +63,7 @@ Get-Help about_* | out-file c:\dev\powershell_help.txt
 - [Loops](loops.md)
 - [Functions](functions.md)
 - [Processes and Services](process_and_service.md)
+- [Working Data](data.ps1)
 - [Debugging](debug/demo01.ps1)
 
 
