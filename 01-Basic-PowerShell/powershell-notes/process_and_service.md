@@ -1,5 +1,5 @@
 ## Application
-* An application is a program which you interact with on the desktop. This is what you spend almost all of your time using on the computer. Internet explorer, microsoft word, iTunes, skype - they are all applications.
+* An application is a program which you interact with on the desktop GUI . This is what you spend almost all of your time using on the computer. Internet explorer, microsoft word, iTunes, skype - they are all applications.
 
 ## Process
 * A process is an instance of a particular executable (.exe program file) running.
