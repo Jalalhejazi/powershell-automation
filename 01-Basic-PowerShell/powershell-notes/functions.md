@@ -44,3 +44,25 @@ Get-Info -name "Human"  -age 44 -country "Danmark"
 Get-Info -name "Anja"   -age 33 -country "USA" 
 Get-Info -name "Nadine" -age 18 
 ```
+
+## What is a Pipeline Function ? 
+
+
+```powershell
+function Get-Function1 {
+    [CmdletBinding()]
+    param
+    (
+        [Parameter(ValueFromPipeline=$true)]
+        $Text
+    )
+ 
+    Process {
+        Write-Host "$Text"
+    }
+
+}
+
+"demo1", "demo2" | Get-Function1
+
+```
