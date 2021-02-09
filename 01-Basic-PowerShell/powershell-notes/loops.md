@@ -45,7 +45,7 @@ Write-Output $name
 $my_bio = @{
     "name" = "Lars Larsen";
     "age" = 55;
-    "country" = "Denmakr";
+    "country" = "Danmark";
 }
 
 foreach($key in $my_bio.Keys){

@@ -30,7 +30,7 @@ $c
 ## filesystem
 
 $dir1 = ls C:\dev\practical-powershell\01-Basic-PowerShell\powershell-notes\*.md
-$dir2 = ls C:\dev\practical-powershell\02-Udvidet-PowerShell\*.md -Recurse
+$dir2 = ls C:\dev\practical-powershell\02-Advanced-PowerShell\*.md -Recurse
 
 $alle_md =  $dir1 + $dir2
 $alle_md.Count
