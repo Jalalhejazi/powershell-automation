@@ -5,9 +5,9 @@ function my-random-generator {
 function deploy-webapp-snippets {
 
     param(
-        $resourceGroup      = "demo-2020",
+        $resourceGroup      = "demo-2021",
         $location           = "westeurope",
-        $appName            = "webapp-2020",
+        $appName            = "webapp-2021",
         $sqlServerName      = "sqlserver",
         $databaseName       = "SnippetsDatabase",
         $sqlServerUsername  = "sysadmin",
@@ -64,3 +64,4 @@ function deploy-webapp-snippets {
 
 
 deploy-webapp-snippets -sqlServerPassword $sa_password
+
