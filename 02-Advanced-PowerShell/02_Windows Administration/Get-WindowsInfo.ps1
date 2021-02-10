@@ -3,7 +3,7 @@
 Get-WindowsInfo.ps1 - PowerShell script to collect information about Windows Operating System
 
 .DESCRIPTION 
-This PowerShell script runs a series of WMI and other queries to collect information
+This PowerShell script runs a series of WMI/CIM and other queries to collect information
 about Windows servers. 
 
 #Requires -RunAsAdministrator
@@ -11,6 +11,7 @@ about Windows servers.
 # Chaning from Get-WMIObject to Get-CimInstance  
 - WMIObject is deprecated technology (windows only)
 - CimInstance is current technology (cloud)
+- ref.: https://www.sapien.com/software/cimexplorer
     
 
 .OUTPUTS
