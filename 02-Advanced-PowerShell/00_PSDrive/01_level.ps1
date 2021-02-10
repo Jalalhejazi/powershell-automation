@@ -2,6 +2,8 @@
 
 ## Step 01 
 ## Dependency Management
+## get-azure-secret --> Azure KeyVault 
+
 
 $connectTestResult = Test-NetConnection -ComputerName superusers2020.file.core.windows.net -Port 445  
 $secret = get-azure-secret -secretName storage-key
