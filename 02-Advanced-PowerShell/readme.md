@@ -3,10 +3,7 @@
 - 00_PowerShell Drive
 - 01_Azure-cli administration
 - 02_Windows administration
+- 03_Modules
+- 04_remote_communication
 
-Inspiration/optionals:
-- DBA SQLServer 
-- DEV dotnet 
-- Exchange (mailbox)
-- Office360  
 
