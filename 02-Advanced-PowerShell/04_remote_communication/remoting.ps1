@@ -51,7 +51,9 @@ Enter-PSSession -ComputerName $PC3
 
 #########################################  one 2 many  ###############################
 # one2many remoting using Invoke-Command (Require $login and Configurations)
-$all_services =  Invoke-Command –Session $login –ScriptBlock { Get-Service | Where-Object { $_.Status –eq 'Running' }}
+$all_services =  Invoke-Command –Session $login –ScriptBlock { 
+    Get-Service | Where-Object { $_.Status –eq 'Running' }
+}
 
 $all_services | Where-Object { $_.PSComputerName -eq $PC2  }
 $all_services | Where-Object { $_.PSComputerName -eq $PC3  }
