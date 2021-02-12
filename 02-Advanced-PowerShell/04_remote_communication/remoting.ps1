@@ -5,6 +5,8 @@
 ## Best Practice to change to PS7 and use ssh and rSync 
 #################################################################################
 
+
+# MUST READ BEFORE
 help about_Remote_Troubleshooting
 
 Enable-PSRemoting -SkipNetworkProfileCheck -Force
@@ -12,7 +14,11 @@ Enable-PSRemoting -SkipNetworkProfileCheck -Force
 get-item wsman:\localhost\Client\TrustedHosts
 set-item wsman:\localhost\Client\TrustedHosts -value *
 
-         
+
+###################################################################################
+# DEMO CODE you can follow at home
+###################################################################################
+
 $PC1     = "193.88.250.11"
 $PC2     = "192.168.1.102" 
 $PC3     = "192.168.1.103"
@@ -43,8 +49,8 @@ Enter-PSSession -ComputerName $PC3
 #Enter-PSSession -Session $login[1]
 
 
-#########################################  one 2 many  ###############
-# one2many remoting using Invoke-Command
+#########################################  one 2 many  ###############################
+# one2many remoting using Invoke-Command (Require $login and Configurations)
 $all_services =  Invoke-Command –Session $login –ScriptBlock { Get-Service | Where-Object { $_.Status –eq 'Running' }}
 
 $all_services | Where-Object { $_.PSComputerName -eq $PC2  }
@@ -67,6 +73,8 @@ Invoke-Command -Session $login -ScriptBlock `
 
 ########################################################################################
 # help about_Remote_Troubleshooting
+# or
+# Why not change to ssh ? 
 ########################################################################################
 
 
