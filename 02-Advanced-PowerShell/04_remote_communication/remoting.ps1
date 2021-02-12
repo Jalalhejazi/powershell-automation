@@ -1,5 +1,8 @@
 #################################################################################
-##  How to Allow My Computer to be Trusted for remoting ? 
+## How to Allow My Computer to be Trusted for remoting ? 
+## PowerShell remoting is Advanced and No Garanti for Success ! 
+##
+## Best Practice to change to PS7 and use ssh and rSync 
 #################################################################################
 
 help about_Remote_Troubleshooting
@@ -17,7 +20,7 @@ $PC3     = "192.168.1.103"
 $Group   = $PC2 , $PC3
 
 
-$login  = New-PSSession -Credential "su\jalal" -ComputerName $PC1
+$login  = New-PSSession -Credential $Env:USERNAME -ComputerName $PC1
 
 $login  = New-PSSession -Credential $Env:USERNAME -ComputerName $Group
 
