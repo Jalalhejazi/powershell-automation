@@ -19,9 +19,9 @@ code $profile
 ```
 
 
-## Sharing Instructor Profile
+## Sharing My Profile
 
-- https://dev.azure.com/superusers-kursus/powershell
+- https://github.com/Jalalhejazi/powershell-profile.git
 
 
 
