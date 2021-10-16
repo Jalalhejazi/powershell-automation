@@ -1,16 +1,16 @@
 
-## Special PowerShell Training Optimized for Cloud Computing
+## Special PowerShell Training/Advice Optimized for Cloud Computing
 
-- We start with the basics in 3 days
-- Some Advanced features in 2 days
-
+- Start with the basics 
+- Continue with Advanced features
+- Use Pester to test before automate
 
 ```powershell
-$url = "https://superusers-kursus@dev.azure.com/superusers-kursus/learning-powershell/_git/practical-powershell"
+$url = "https://github.com/Jalalhejazi/powershell-automation.git"
 
 git clone $url
 
-cd practical-powershell
+cd powershell-automation
 
 code .
 ```
@@ -20,13 +20,13 @@ code .
 # Best Practices from DevOps automation
 
 - The best way to learn PowerShell is to automate **Cloud Resources**
-  - Create/connect Windows Virtual Machines 
-  - Create/connect Linux (Ubuntu)  
+  - Create/ssh-connect Windows 
+  - Create/ssh-connect Linux 
   - Automate everything you can.
 
-- Start using PowerShell and stop using "Windows powershell"
+- Start using PowerShell cross-platform and stop using "Windows powershell"
 
-- Learn PowerShell on Linux and Windows 
+- Learn PowerShell on Linux and Windows at the same time
 
 - save your powershell scripts in git and share with public users
 
@@ -36,7 +36,8 @@ code .
 - Do Not repeat Yourself (DRY)
   - use Variables
   - use Functions
-  - use [$profile](https://dev.azure.com/superusers-kursus/learning-powershell/_wiki/wikis/kursus-powershell.wiki/750/Profile)
+  - use [$profile optimization](https://github.com/Jalalhejazi/powershell-profile.git)
+  - Happy Automation
   
 
 
