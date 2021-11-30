@@ -1,5 +1,5 @@
 
-## Special PowerShell Training/Advice Optimized for Cloud Computing
+## Special PowerShell Training 
 
 - Start with the basics 
 - Continue with Advanced features
