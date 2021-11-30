@@ -3,7 +3,6 @@
 
 - Start with the basics 
 - Continue with Advanced features
-- Use Pester to test before automate
 
 ```powershell
 $url = "https://github.com/Jalalhejazi/powershell-automation.git"
