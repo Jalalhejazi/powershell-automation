@@ -1,8 +1,7 @@
 
 ## Special PowerShell Training 
 
-- Start with the basics 
-- Continue with Advanced features
+clone on localhost
 
 ```powershell
 $url = "https://github.com/Jalalhejazi/powershell-automation.git"
